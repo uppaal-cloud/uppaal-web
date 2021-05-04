@@ -6,11 +6,12 @@ import Root from './Root';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
 import theme from './theme';
+import Routes from './routes';
 
 ReactDOM.render(
     <React.StrictMode>
         <ColorModeScript initialColorMode="dark" />
-        <Root />
+        <Routes />
     </React.StrictMode>,
     document.getElementById('root')
 );
