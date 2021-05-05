@@ -24,7 +24,7 @@ const Login = (props: any) => {
             console.log(res);
 
             props.history.push('/');
-            window.location.reload();
+            // window.location.reload();
         });
     };
 
