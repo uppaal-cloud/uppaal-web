@@ -7,6 +7,9 @@ import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
 import theme from './theme';
 import Routes from './routes';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://uppaal.mywire.org/v1';
 
 ReactDOM.render(
     <React.StrictMode>

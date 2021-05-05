@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'http://uppaal.mywire.org/';
+// const API_URL = 'http://uppaal.mywire.org/';
 
 const login = (email: string, password: string): any => {
     return axios
-        .post(API_URL + 'v1/auth/login', {
+        .post('/auth/login', {
             email,
             password,
         })

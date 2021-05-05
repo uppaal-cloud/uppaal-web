@@ -68,7 +68,7 @@ const SidebarItem = styled.div`
     transition: all 0.25s ease-in-out;
     //Change the background color if 'active' prop is received
 
-    background: ${(props: Props) => (props.active ? '#fff' : '')};
+    background: ${(props: Props) => (props.active ? '#810b0b' : '')};
     margin: 4px 12px;
     border-radius: 4px;
 

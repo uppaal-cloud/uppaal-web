@@ -1,4 +1,4 @@
-import { ChakraProvider, theme, CSSReset } from '@chakra-ui/react';
+import { ChakraProvider, theme, CSSReset, Flex } from '@chakra-ui/react';
 import Sidebar from './components/Sidebar';
 import App from './App';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -21,14 +21,14 @@ function Root(props: any) {
     return (
         <ChakraProvider theme={theme}>
             <CSSReset />
-            <ColorModeSwitcher />
             <div style={{ display: 'flex' }}>
                 <Sidebar history={props.history} />
-                <div style={{ maxWidth: '800px' }}>
-                    <Nav />
+                <Flex w="100%">
+                    {/* <Nav /> */}
                     {props.children}
-                </div>
+                </Flex>
             </div>
+            <ColorModeSwitcher />
         </ChakraProvider>
     );
 }

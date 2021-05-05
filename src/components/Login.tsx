@@ -23,8 +23,8 @@ const Login = (props: any) => {
         await AuthService.login(email, password).then((res: any) => {
             console.log(res);
 
-            // props.history.push('/');
-            // window.location.reload();
+            props.history.push('/');
+            window.location.reload();
         });
     };
 
