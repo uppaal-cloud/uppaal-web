@@ -24,10 +24,11 @@ const App = ({ props }: any) => {
     return (
         // <SidebarExample />
         <div>
+            h1
             <div style={{ display: 'flex' }}>
                 <Sidebar />
                 <div>
-                    <Nav />
+                    {/* <Nav /> */}
                     {/* <Routes /> */}
                 </div>
             </div>
