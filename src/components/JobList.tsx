@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useTable, usePagination } from 'react-table';
+import { useTable, useExpanded, usePagination, Cell } from 'react-table';
 import {
     Table,
     Thead,
@@ -255,8 +255,8 @@ function JobList() {
                     ram: entry.usage.ram,
                     start: entry.start_time,
                     end: entry.end_time,
-                    xml: 'entry.xml',
-                    queries: [],
+                    xml: entry.xml,
+                    queries: entry.queries,
                 };
             });
             setData(arr);
@@ -290,6 +290,10 @@ function JobList() {
             {
                 Header: 'Start Time',
                 accessor: 'start',
+                Cell: ({ row }: any) => {
+                    console.log(row.original);
+                    return <span>{row.original.name}</span>;
+                },
             },
             {
                 Header: 'End Time',
@@ -298,10 +302,12 @@ function JobList() {
             {
                 Header: 'XML',
                 accessor: 'xml',
+                Cell: ({ row }) => <span>entry.xml</span>,
             },
             {
                 Header: 'Results',
                 accessor: 'queries',
+                Cell: ({ row }) => <span>{row.original.queries.length}</span>,
             },
         ],
         []
