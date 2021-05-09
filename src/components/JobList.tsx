@@ -307,7 +307,9 @@ function JobList() {
             {
                 Header: 'Results',
                 accessor: 'queries',
-                Cell: ({ row }) => <span>{row.original.queries.length}</span>,
+                Cell: ({ row: { original } }) => (
+                    <span>{original.queries.length}</span>
+                ),
             },
         ],
         []
