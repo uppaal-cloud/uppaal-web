@@ -9,9 +9,14 @@ import SidebarExample from './components/SimpleSidebar';
 import Routes from './routes';
 import login from './services/auth.service';
 import AuthService from './services/auth.service';
+import Aside from './components/Aside';
+import './components/App.scss';
+import Main from './components/Main';
 
-const App = ({ props }: any) => {
+const App: any = ({ props }: any) => {
     const [currentUser, setCurrentUser] = useState(undefined);
+    const [toggled, setToggled] = useState(false);
+    const [collapsed, setCollapsed] = useState(false);
 
     useEffect(() => {
         const user = AuthService.getCurrentUser();
@@ -21,18 +26,39 @@ const App = ({ props }: any) => {
         }
     }, []);
 
+    const handleToggleSidebar = (value: any) => {
+        setToggled(value);
+    };
+    const handleCollapsedChange = (checked: any) => {
+        setCollapsed(checked);
+    };
+
     return (
-        // <SidebarExample />
-        <div>
-            h1
-            <div style={{ display: 'flex' }}>
-                <Sidebar />
-                <div>
-                    {/* <Nav /> */}
-                    {/* <Routes /> */}
-                </div>
-            </div>
+        <div className={`app ${toggled ? 'toggled' : ''}`}>
+            <Aside
+                collapsed={collapsed}
+                toggled={toggled}
+                handleToggleSidebar={handleToggleSidebar}
+            />
+            <>{props.children}</>
+            {/* <Main
+                collapsed={collapsed}
+                toggled={toggled}
+                handleToggleSidebar={handleToggleSidebar}
+                handleCollapsedChange={handleCollapsedChange}
+            /> */}
         </div>
+        // <SidebarExample />
+        // <div>
+        //     h1
+        //     <div style={{ display: 'flex' }}>
+        //         <Sidebar />
+        //         <div>
+        //             {/* <Nav /> */}
+        //             {/* <Routes /> */}
+        //         </div>
+        //     </div>
+        // </div>
 
         // <Login />
     );

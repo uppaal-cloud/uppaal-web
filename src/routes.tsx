@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Jobs from './components/Jobs';
 import NotFound from './components/NotFound';
 import JobList from './components/JobList';
+import FileDropzone from './components/FileDropzone';
 // import Layout from './components/Layout';
 
 function Routes() {
@@ -21,6 +22,8 @@ function Routes() {
                             <Route path="/login" component={Login} />
                             <Route path="/register" component={Register} />
                             <Route path="/jobs" component={JobList} />
+                            <Route path="/new-job" component={FileDropzone} />
+
                             <Route component={NotFound} />
                         </Switch>
                     </Root>

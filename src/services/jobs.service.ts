@@ -11,4 +11,22 @@ const fetchJobs = () => {
     });
 };
 
-export default { fetchJobs };
+const sumbitJob = (xml: string) => {
+    const user = JSON.parse(localStorage.getItem('user')!);
+
+    const requestParams = {
+        name: 'test job',
+        description: 'desc',
+        xml: xml,
+    };
+
+    if (!user) return;
+
+    return axios
+        .post('/job', requestParams, { headers: authHeader() })
+        .then((response) => {
+            return response.data;
+        });
+};
+
+export default { fetchJobs, sumbitJob };

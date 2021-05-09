@@ -22,11 +22,12 @@ function Root(props: any) {
         <ChakraProvider theme={theme}>
             <CSSReset />
             <div style={{ display: 'flex' }}>
-                <Sidebar history={props.history} />
-                <Flex w="100%">
-                    {/* <Nav /> */}
-                    {props.children}
-                </Flex>
+                <App props={props} />
+                {/* <Sidebar history={props.history} /> */}
+                {/* <Flex w="100%"> */}
+                {/* <Nav /> */}
+                {/* {props.children} */}
+                {/* </Flex> */}
             </div>
             <ColorModeSwitcher />
         </ChakraProvider>
