@@ -17,12 +17,19 @@ import {
     NumberInputStepper,
     NumberIncrementStepper,
     NumberDecrementStepper,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    Box,
+    AccordionIcon,
+    AccordionPanel,
 } from '@chakra-ui/react';
 import {
     ArrowRightIcon,
     ArrowLeftIcon,
     ChevronRightIcon,
     ChevronLeftIcon,
+    ViewIcon,
 } from '@chakra-ui/icons';
 import JobService from '../services/jobs.service';
 
@@ -207,35 +214,35 @@ function TCell({ columns, data }: any) {
     });
 
     return (
-        <table {...getTableProps()}>
-            <thead>
+        <Table {...getTableProps()}>
+            <Thead>
                 {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                    <Tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps()}>
+                            <Th {...column.getHeaderProps()}>
                                 {column.render('Header')}
-                            </th>
+                            </Th>
                         ))}
-                    </tr>
+                    </Tr>
                 ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
+            </Thead>
+            <Tbody {...getTableBodyProps()}>
                 {rows.map((row, i) => {
                     prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()}>
+                        <Tr {...row.getRowProps()}>
                             {row.cells.map((cell) => {
                                 return (
-                                    <td {...cell.getCellProps()}>
+                                    <Td {...cell.getCellProps()}>
                                         {cell.render('Cell')}
-                                    </td>
+                                    </Td>
                                 );
                             })}
-                        </tr>
+                        </Tr>
                     );
                 })}
-            </tbody>
-        </table>
+            </Tbody>
+        </Table>
     );
 }
 
@@ -302,7 +309,12 @@ function JobList() {
             {
                 Header: 'XML',
                 accessor: 'xml',
-                Cell: ({ row }) => <span>entry.xml</span>,
+                Cell: ({ row }) => (
+                    <Tooltip label="View XML" fontSize="md">
+                        {/* <ViewIcon /> */}
+                        <IconButton aria-label="View XML" icon={<ViewIcon />} />
+                    </Tooltip>
+                ),
             },
             {
                 Header: 'Results',

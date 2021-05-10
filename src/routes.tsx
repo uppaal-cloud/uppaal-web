@@ -21,7 +21,7 @@ function Routes() {
                             <Route path="/dashboard" exact component={Home} />
                             <Route path="/login" component={Login} />
                             <Route path="/register" component={Register} />
-                            <Route path="/jobs" component={JobList} />
+                            <Route path="/jobs" component={Jobs} />
                             <Route path="/new-job" component={FileDropzone} />
 
                             <Route component={NotFound} />

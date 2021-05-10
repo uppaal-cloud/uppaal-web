@@ -3,9 +3,9 @@ import Sidebar from './components/Sidebar';
 import App from './App';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Nav from './components/Nav';
+import '../node_modules/react-pro-sidebar/dist/scss/styles.scss';
 import GlobalStyle from './GlobalStyles';
 // import 'react-pro-sidebar/dist/scss/styles.scss';
-import '../node_modules/react-pro-sidebar/dist/scss/styles.scss';
 import 'typeface-roboto';
 
 // const Root = ({ props }: any) => (

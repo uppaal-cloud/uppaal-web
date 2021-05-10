@@ -3,15 +3,16 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
 /* @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap'); */
 
-$sidebar-bg-color: #1d1d1d;
-$submenu-bg-color: rgba(255, 255, 255, 0.05);
-$submenu-bg-color-collapsed: rgba(29, 29, 29, 0.95);
-$sidebar-color: #adadad;
-$highlight-color: #d8d8d8;
-$icon-bg-color: rgba(255, 255, 255, 0.05);
+$sidebar-bg-color: pink;
+$submenu-bg-color: hotpink;
+$submenu-bg-color-collapsed: red;
+$sidebar-color: green;
+$highlight-color: purple;
+$icon-bg-color: yellow;
 $icon-size: 35px;
 
-/* @import '~react-pro-sidebar/dist/scss/styles.scss'; */
+/* @import '~react-
+bar/dist/scss/styles.scss'; */
 body {
     margin: 0;
     height: 100vh;

@@ -1,15 +1,21 @@
-import { BaseSyntheticEvent } from 'react';
+import React, { BaseSyntheticEvent, FC } from 'react';
 import styled from 'styled-components';
 import {
     ProSidebar,
     Menu,
-    MenuItem,
+    SubMenu,
     SidebarHeader,
     SidebarFooter,
     SidebarContent,
+    MenuItem,
 } from 'react-pro-sidebar';
 import {
+    FaTachometerAlt,
+    FaGem,
+    FaList,
     FaSignOutAlt,
+    FaRegLaughWink,
+    FaHeart,
     FaHome,
     FaSignInAlt,
     FaTasks,
@@ -18,6 +24,7 @@ import {
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import authService from '../services/auth.service';
+import { Button } from '@chakra-ui/button';
 
 const handleLogout = (event: BaseSyntheticEvent) => {
     event.preventDefault();
