@@ -15,7 +15,7 @@ function Routes() {
         <BrowserRouter>
             <Route
                 render={(props) => (
-                    <Root {...props}>
+                    <Root {...props} style={{ backgroud: 'red' }}>
                         <Switch>
                             <Route path="/" exact component={Home} />
                             <Route path="/dashboard" exact component={Home} />

@@ -1,22 +1,28 @@
-import React, { FC } from 'react';
+import { BaseSyntheticEvent } from 'react';
+import styled from 'styled-components';
 import {
     ProSidebar,
     Menu,
     MenuItem,
-    SubMenu,
     SidebarHeader,
     SidebarFooter,
     SidebarContent,
 } from 'react-pro-sidebar';
 import {
-    FaTachometerAlt,
-    FaGem,
-    FaList,
-    FaGithub,
-    FaRegLaughWink,
-    FaHeart,
+    FaSignOutAlt,
+    FaHome,
+    FaSignInAlt,
+    FaTasks,
+    FaPlus,
+    FaUserPlus,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import authService from '../services/auth.service';
+
+const handleLogout = (event: BaseSyntheticEvent) => {
+    event.preventDefault();
+    authService.logout();
+};
 
 const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
     return (
@@ -39,33 +45,35 @@ const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
                     }}
-                ></div>
+                >
+                    Uppaal Cloud
+                </div>
             </SidebarHeader>
 
             <SidebarContent>
                 <Menu iconShape="circle">
-                    <MenuItem
-                        icon={<FaTachometerAlt />}
-                        suffix={<span className="badge red">NEW</span>}
-                    >
+                    <MenuItem icon={<FaHome />}>
                         Home
                         <Link to="/" />
                     </MenuItem>
-                    <MenuItem icon={<FaGem />}>
+                    <MenuItem icon={<FaSignInAlt />}>
                         Login
                         <Link to="/login" />
                     </MenuItem>
-                    <MenuItem icon={<FaGem />}>
+                    <MenuItem icon={<FaUserPlus />}>
                         Register <Link to="/register" />
                     </MenuItem>
-                    <MenuItem icon={<FaGem />}>
+                    <MenuItem
+                        icon={<FaTasks />}
+                        suffix={<span className="badge red">1</span>}
+                    >
                         Jobs <Link to="/jobs" />
                     </MenuItem>
-                    <MenuItem icon={<FaGem />}>
+                    <MenuItem icon={<FaPlus />}>
                         Add New Job <Link to="/new-job" />
                     </MenuItem>
                 </Menu>
-                <Menu iconShape="circle">
+                {/* <Menu iconShape="circle">
                     <SubMenu
                         suffix={<span className="badge yellow">3</span>}
                         title="withSuffix"
@@ -75,7 +83,7 @@ const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
                         <MenuItem>Submenu 2</MenuItem>
                         <MenuItem>Submenu 3</MenuItem>
                     </SubMenu>
-                </Menu>
+                </Menu> */}
             </SidebarContent>
 
             <SidebarFooter style={{ textAlign: 'center' }}>
@@ -86,13 +94,14 @@ const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
                     }}
                 >
                     <a
-                        href="https://github.com/azouaoui-med/react-pro-sidebar"
+                        href="!#"
+                        onClick={handleLogout}
                         target="_blank"
                         className="sidebar-btn"
                         rel="noopener noreferrer"
                     >
-                        <FaGithub />
-                        <span>Vire Source</span>
+                        <FaSignOutAlt />
+                        <span>Logout</span>
                     </a>
                 </div>
             </SidebarFooter>
@@ -101,3 +110,9 @@ const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
 };
 
 export default Aside;
+
+const SidebarParent = styled.div`
+    background: #cf3d2a;
+    width: 250px;
+    height: 100vh;
+`;
