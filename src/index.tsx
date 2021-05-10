@@ -9,7 +9,7 @@ import theme from './theme';
 import Routes from './routes';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://uppaal.mywire.org/v1';
+axios.defaults.baseURL = 'http://uppaal.mywire.org/v1';
 
 ReactDOM.render(
     <React.StrictMode>
