@@ -75,13 +75,13 @@ function TCell({ columns, data }: any) {
                                                 <AccordionButton>
                                                     <AccordionIcon />
                                                     <Box flex="1" textAlign="left">
-                                                        Results
+                                                        Results ({data[i].queries.length})
                                                     </Box>
                                                 </AccordionButton>
                                             </h2>
                                             <AccordionPanel pb={4}>
                                                 <List>
-                                                    {row.values.queries.map((query: Query) => {
+                                                    {data[i].queries.map((query: Query) => {
                                                         return (
                                                             <ListItem>
                                                                 <ListIcon
@@ -137,8 +137,6 @@ function JobList() {
                 };
             });
             setData(arr);
-            console.log(res);
-            console.log(arr);
         })();
     }, []);
 
@@ -210,11 +208,11 @@ function JobList() {
                     </>
                 ),
             },
-            {
-                Header: 'Results',
-                accessor: 'queries',
-                Cell: ({ row: { original } }: Cell<any>) => <span>{original.queries.length}</span>,
-            },
+            // {
+            //     Header: 'Results',
+            //     accessor: 'queries',
+            //     Cell: ({ row: { original } }: Cell<any>) => <span>{original.queries.length}</span>,
+            // },
         ],
         [onOpen]
     );
