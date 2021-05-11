@@ -1,18 +1,21 @@
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import useFindUser from './useFindUser';
 import { UserContext } from './UserContext';
 
 export default function useAuth() {
     let history = useHistory();
-    const { setUser } = useContext(UserContext);
+    // const { setUser } = useContext(UserContext);
+    const { setUser } = useFindUser();
     const [error, setError] = useState('');
 
-    const setUserContext = async (user: any) => {
+    const setUserContext = (user: any) => {
         if (!user) setError('local storage empty');
         setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
 
-        history.push('/home');
+        history.push('/jobs');
     };
 
     const login = (email: string, password: string): any => {
@@ -24,7 +27,7 @@ export default function useAuth() {
             .then((response) => {
                 if (response.status === 200 && response.data.token) {
                     setUserContext(response.data);
-                    localStorage.setItem('user', JSON.stringify(response.data));
+                    window.location.reload();
                 }
 
                 return response.data;
@@ -35,7 +38,3 @@ export default function useAuth() {
     };
     return { login, error };
 }
-
-// export default { login, error };
-
-// export default useAuth;

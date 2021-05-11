@@ -52,20 +52,31 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
                         Home
                         <Link to="/" />
                     </MenuItem>
-                    <MenuItem icon={<FaSignInAlt />}>
-                        Login
-                        <Link to="/login" />
-                    </MenuItem>
-                    <MenuItem icon={<FaUserPlus />}>
-                        Register <Link to="/register" />
-                    </MenuItem>
+
+                    {!user && (
+                        <MenuItem icon={<FaSignInAlt />}>
+                            Login
+                            <Link to="/login" />
+                        </MenuItem>
+                    )}
+
+                    {!user && (
+                        <MenuItem icon={<FaUserPlus />}>
+                            Register <Link to="/register" />
+                        </MenuItem>
+                    )}
                     {/* <MenuItem icon={<FaTasks />} suffix={<span className="badge red">1</span>}> */}
-                    <MenuItem icon={<FaTasks />}>
-                        Jobs <Link to="/jobs" />
-                    </MenuItem>
-                    <MenuItem icon={<FaPlus />}>
-                        Add New Job <Link to="/new-job" />
-                    </MenuItem>
+
+                    {user && (
+                        <MenuItem icon={<FaTasks />}>
+                            Jobs <Link to="/jobs" />
+                        </MenuItem>
+                    )}
+                    {user && (
+                        <MenuItem icon={<FaPlus />}>
+                            Add New Job <Link to="/new-job" />
+                        </MenuItem>
+                    )}
                     <MenuItem icon={<ColorModeSwitcher />}>Change theme</MenuItem>
                 </Menu>
             </SidebarContent>
@@ -78,7 +89,7 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
                     }}
                 >
                     <a
-                        href="!#"
+                        href="/"
                         onClick={(event) => {
                             event.preventDefault();
                             authService.logout();
