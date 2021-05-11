@@ -11,13 +11,13 @@ import { FaSignOutAlt, FaHome, FaSignInAlt, FaTasks, FaPlus, FaUserPlus } from '
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import authService from '../services/auth.service';
+import useFindUser from '../hooks/useFindUser';
 
-const handleLogout = (event: BaseSyntheticEvent) => {
-    event.preventDefault();
-    authService.logout();
-};
+// const handleLogout = (event: BaseSyntheticEvent) => {
+// };
 
 const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
+    const { user, setUser, isLoading } = useFindUser();
     return (
         <ProSidebar
             rtl={rtl}
@@ -78,7 +78,11 @@ const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
                 >
                     <a
                         href="!#"
-                        onClick={handleLogout}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            authService.logout();
+                            setUser(null);
+                        }}
                         target="_blank"
                         className="sidebar-btn"
                         rel="noopener noreferrer"

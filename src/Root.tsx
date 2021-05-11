@@ -3,6 +3,7 @@ import { ChakraProvider, theme, CSSReset } from '@chakra-ui/react';
 import GlobalStyle from './GlobalStyles';
 import '../node_modules/react-pro-sidebar/dist/scss/styles.scss';
 import 'typeface-roboto';
+import { UserContext } from './hooks/UserContext';
 
 function Root(props: any) {
     return (

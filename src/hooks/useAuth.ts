@@ -3,16 +3,15 @@ import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from './UserContext';
 
-const useAuth = () => {
+export default function useAuth() {
     let history = useHistory();
     const { setUser } = useContext(UserContext);
     const [error, setError] = useState('');
 
     const setUserContext = async (user: any) => {
-        // const user = JSON.parse(localStorage.getItem('user')!);
-
         if (!user) setError('local storage empty');
         setUser(user);
+
         history.push('/home');
     };
 
@@ -25,7 +24,7 @@ const useAuth = () => {
             .then((response) => {
                 if (response.status === 200 && response.data.token) {
                     setUserContext(response.data);
-                    // localStorage.setItem('user', JSON.stringify(response.data));
+                    localStorage.setItem('user', JSON.stringify(response.data));
                 }
 
                 return response.data;
@@ -34,8 +33,9 @@ const useAuth = () => {
                 setError(err);
             });
     };
-
     return { login, error };
-};
+}
 
-export default useAuth;
+// export default { login, error };
+
+// export default useAuth;

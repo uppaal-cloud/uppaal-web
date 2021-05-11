@@ -35,6 +35,7 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon } from '@chakra-ui/icons';
 import JobService from '../services/jobs.service';
+import useFindUser from '../hooks/useFindUser';
 
 function TCell({ columns, data }: any) {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
@@ -118,11 +119,15 @@ function JobList() {
     const [data, setData] = useState([]);
     const [xml, setXml] = useState('');
     let { isOpen, onOpen, onClose } = useDisclosure();
+    const { user, isLoading } = useFindUser();
 
     useEffect(() => {
         (async () => {
-            const res = await JobService.fetchJobs();
-
+            const res = await JobService.fetchJobs(user);
+            if (!res) {
+                console.log('no user');
+                return;
+            }
             const arr: any = res.map((entry: any) => {
                 return {
                     name: entry.name,
@@ -138,7 +143,7 @@ function JobList() {
             });
             setData(arr);
         })();
-    }, []);
+    }, [user]);
 
     const handleDownload = (xml: string) => {
         const blob = new Blob([xml], { type: 'text/plain;charset=utf-8' });

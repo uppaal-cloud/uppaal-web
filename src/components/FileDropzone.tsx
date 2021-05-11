@@ -3,6 +3,7 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useDropzone, FileWithPath } from 'react-dropzone';
 
 import styled from 'styled-components';
+import useFindUser from '../hooks/useFindUser';
 import JobService from '../services/jobs.service';
 
 const getColor = (props: any) => {
@@ -35,52 +36,53 @@ const DropContainer = styled.div`
 `;
 function FileDropzone(props: any) {
     const [file, setFile] = useState<any>({});
-    const onDrop = useCallback((acceptedFile: any) => {
-        console.log(acceptedFile);
+    const { user, isLoading } = useFindUser();
 
-        const xmlFile = acceptedFile[0];
+    const onDrop = useCallback(
+        (acceptedFile: any) => {
+            console.log(acceptedFile);
 
-        if (!xmlFile) {
-            return;
-        }
-        const reader = new FileReader();
+            const xmlFile = acceptedFile[0];
 
-        reader.onabort = () => console.log('file reading was aborted');
-        reader.onerror = () => console.log('file reading has failed');
-        reader.onload = async () => {
-            const xmlStr = reader.result!.toString();
-            // console.log(xmlStr);
+            if (!xmlFile) {
+                return;
+            }
+            const reader = new FileReader();
 
-            // TODO: Validate xml ???
-            // const parser = new DOMParser();
-            // const parsedXml = parser.parseFromString(xmlStr, 'application/xml');
-            // console.log(parsedXml);
-            const res = await JobService.sumbitJob(xmlStr);
-            console.log(res);
-        };
+            reader.onabort = () => console.log('file reading was aborted');
+            reader.onerror = () => console.log('file reading has failed');
+            reader.onload = async () => {
+                const xmlStr = reader.result!.toString();
+                // console.log(xmlStr);
 
-        reader.readAsText(xmlFile);
+                // TODO: Validate xml ???
+                // const parser = new DOMParser();
+                // const parsedXml = parser.parseFromString(xmlStr, 'application/xml');
+                // console.log(parsedXml);
+                const res = await JobService.sumbitJob(user, xmlStr);
+                console.log(res);
+            };
 
-        setFile(acceptedFile[0]);
-    }, []);
+            reader.readAsText(xmlFile);
+
+            setFile(acceptedFile[0]);
+        },
+        [user]
+    );
 
     useEffect(() => {
         // submitJob(file.)
         console.log(file);
     }, [file]);
 
-    const {
-        getRootProps,
-        getInputProps,
-        isDragActive,
-        isDragAccept,
-        isDragReject,
-    } = useDropzone({ onDrop, multiple: false, accept: 'text/xml' });
+    const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
+        onDrop,
+        multiple: false,
+        accept: 'text/xml',
+    });
     return (
         <Container>
-            <DropContainer
-                {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
-            >
+            <DropContainer {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
                 <input {...getInputProps()} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
             </DropContainer>

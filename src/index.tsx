@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
-import theme from './theme';
 import Routes from './routes';
 import axios from 'axios';
 
@@ -17,8 +16,6 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root')
 );
-
-console.log(theme);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

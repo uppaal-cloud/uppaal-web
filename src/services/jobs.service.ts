@@ -1,18 +1,18 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const fetchJobs = () => {
-    const user = JSON.parse(localStorage.getItem('user')!);
+const fetchJobs = (user: any) => {
+    const localUser = JSON.parse(localStorage.getItem('user')!);
 
-    if (!user) return;
+    if (!localUser) return;
 
-    return axios.get('/job', { headers: authHeader() }).then((response) => {
+    return axios.get('/job', { headers: authHeader(user) }).then((response) => {
         return response.data.reverse();
     });
 };
 
-const sumbitJob = (xml: string) => {
-    const user = JSON.parse(localStorage.getItem('user')!);
+const sumbitJob = (user: any, xml: string) => {
+    // const user = JSON.parse(localStorage.getItem('user')!);
 
     const requestParams = {
         name: 'test job',
@@ -22,7 +22,7 @@ const sumbitJob = (xml: string) => {
 
     if (!user) return;
 
-    return axios.post('/job', requestParams, { headers: authHeader() }).then((response) => {
+    return axios.post('/job', requestParams, { headers: authHeader(user) }).then((response) => {
         return response.data;
     });
 };

@@ -7,27 +7,35 @@ import Register from './components/Register';
 import Jobs from './components/Jobs';
 import NotFound from './components/NotFound';
 import FileDropzone from './components/FileDropzone';
+import { UserContext } from './hooks/UserContext';
+import useFindUser from './hooks/useFindUser';
+import PrivateRoute from './components/PrivateRoute';
 
 function Routes() {
-    return (
-        <BrowserRouter>
-            <Route
-                render={(props) => (
-                    <Root {...props} style={{ backgroud: 'red' }}>
-                        <Switch>
-                            <Route path="/" exact component={Home} />
-                            <Route path="/dashboard" exact component={Home} />
-                            <Route path="/login" component={Login} />
-                            <Route path="/register" component={Register} />
-                            <Route path="/jobs" component={Jobs} />
-                            <Route path="/new-job" component={FileDropzone} />
+    const { user, setUser, isLoading } = useFindUser();
+    console.log(user);
 
-                            <Route component={NotFound} />
-                        </Switch>
-                    </Root>
-                )}
-            />
-        </BrowserRouter>
+    return (
+        <UserContext.Provider value={{ user, setUser, isLoading }}>
+            <BrowserRouter>
+                <Route
+                    render={(props) => (
+                        <Root {...props} style={{ backgroud: 'red' }}>
+                            <Switch>
+                                <Route path="/" exact component={Home} />
+                                <Route path="/dashboard" exact component={Home} />
+                                <Route path="/login" component={Login} />
+                                <Route path="/register" component={Register} />
+                                <PrivateRoute path="/jobs" component={Jobs} />
+                                <PrivateRoute path="/new-job" component={FileDropzone} />
+
+                                <Route component={NotFound} />
+                            </Switch>
+                        </Root>
+                    )}
+                />
+            </BrowserRouter>
+        </UserContext.Provider>
     );
 }
 

@@ -1,12 +1,21 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const useFindUser = () => {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+export default function useFindUser() {
+    const [user, setUser] = useState<any>(null);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        // await axios.
-        return;
-    });
-};
+        async function findUser() {
+            const usr = JSON.parse(localStorage.getItem('user')!);
+
+            if (usr) setUser(usr);
+            setLoading(false);
+        }
+        findUser();
+    }, []);
+    return {
+        user,
+        setUser,
+        isLoading,
+    };
+}

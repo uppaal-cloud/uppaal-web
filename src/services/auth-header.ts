@@ -1,9 +1,9 @@
-const authHeader = () => {
-    const user = JSON.parse(localStorage.getItem('user')!);
+const authHeader = (user?: any) => {
+    const localUser = JSON.parse(localStorage.getItem('user')!);
+    //
+    if (!localUser || !localUser.token) return;
 
-    if (!user || !user.token) return;
-
-    return { 'x-access-token': user.token };
+    return { 'x-access-token': localUser.token };
 };
 
 export default authHeader;

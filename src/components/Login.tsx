@@ -10,17 +10,22 @@ import {
     InputGroup,
 } from '@chakra-ui/react';
 import { BaseSyntheticEvent, useState } from 'react';
-import AuthService from '../services/auth.service';
+import useAuth from '../hooks/useAuth';
+// import AuthService from '../services/auth.service';
+// import
 
 const Login = (props: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const { login } = useAuth();
 
     const handleSignIn = async (event: BaseSyntheticEvent) => {
         event.preventDefault();
 
-        await AuthService.login(email, password).then((res: any) => {
+        // login
+
+        await login(email, password).then((res: any) => {
             console.log(res);
 
             props.history.push('/');
@@ -30,13 +35,7 @@ const Login = (props: any) => {
 
     return (
         <Flex width="full" align="center" justifyContent="center">
-            <Box
-                p={8}
-                maxWidth="600px"
-                borderWidth={1}
-                borderRadius={8}
-                boxShadow="lg"
-            >
+            <Box p={8} maxWidth="600px" borderWidth={1} borderRadius={8} boxShadow="lg">
                 <Box textAlign="center">
                     <Heading>Login</Heading>
                 </Box>
@@ -46,9 +45,7 @@ const Login = (props: any) => {
                             <FormLabel htmlFor="email">Email</FormLabel>
                             <Input
                                 type="email"
-                                onChange={({ target }) =>
-                                    setEmail(target.value)
-                                }
+                                onChange={({ target }) => setEmail(target.value)}
                                 placeholder="test@test.com"
                             />
                         </FormControl>
@@ -57,9 +54,7 @@ const Login = (props: any) => {
                             <InputGroup>
                                 <Input
                                     type={showPassword ? 'text' : 'password'}
-                                    onChange={({ target }) =>
-                                        setPassword(target.value)
-                                    }
+                                    onChange={({ target }) => setPassword(target.value)}
                                     placeholder="*******"
                                 />
                                 <InputRightElement width="3rem">
@@ -67,16 +62,8 @@ const Login = (props: any) => {
                                         aria-label="Show password"
                                         h="1.5rem"
                                         size="sm"
-                                        onClick={() =>
-                                            setShowPassword(!showPassword)
-                                        }
-                                        icon={
-                                            showPassword ? (
-                                                <ViewIcon />
-                                            ) : (
-                                                <ViewOffIcon />
-                                            )
-                                        }
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                                     />
                                 </InputRightElement>
                             </InputGroup>
