@@ -47,7 +47,11 @@ function TCell({ columns, data }: any) {
                         <>
                             <Tr {...row.getRowProps()}>
                                 {row.cells.map((cell) => {
-                                    return <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>;
+                                    return (
+                                        <Td borderBottom="none" {...cell.getCellProps()}>
+                                            {cell.render('Cell')}
+                                        </Td>
+                                    );
                                 })}
                             </Tr>
                             <Tr>
