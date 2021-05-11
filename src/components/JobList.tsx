@@ -233,7 +233,7 @@ function JobList() {
     return (
         <>
             <TCell columns={columns} data={data} />
-            <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
+            <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside" size="3xl">
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>XML Document</ModalHeader>
