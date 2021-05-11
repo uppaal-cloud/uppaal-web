@@ -32,13 +32,14 @@ export default function useAuth() {
                     console.log(userRecord);
 
                     setUserContext(userRecord);
-                    window.location.reload();
+                    // window.location.reload();
                 }
 
                 return response.data;
             })
             .catch((err) => {
                 setError(err);
+                return;
             });
     };
     return { login, error };

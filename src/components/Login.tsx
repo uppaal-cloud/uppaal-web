@@ -27,9 +27,10 @@ const Login = (props: any) => {
 
         await login(email, password).then((res: any) => {
             console.log(res);
-
-            props.history.push('/');
-            // window.location.reload();
+            if (res) {
+                props.history.push('/');
+                // window.location.reload();
+            }
         });
     };
 

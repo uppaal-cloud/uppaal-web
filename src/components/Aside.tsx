@@ -16,7 +16,7 @@ import {
     FaAngleDoubleRight,
     FaAngleDoubleLeft,
 } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import authService from '../services/auth.service';
 import useFindUser from '../hooks/useFindUser';
@@ -26,6 +26,7 @@ import useFindUser from '../hooks/useFindUser';
 
 const Aside: any = ({ collapsed, setCollapsed }: any) => {
     const { user, setUser, isLoading } = useFindUser();
+    let history = useHistory();
 
     return (
         <ProSidebar collapsed={collapsed} breakPoint="md">
@@ -42,7 +43,7 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
                         whiteSpace: 'nowrap',
                     }}
                 >
-                    {user?.email || 'Uppaal Cloud'}
+                    {JSON.parse(localStorage.getItem('user')!)?.email || 'Uppaal Cloud'}
                 </div>
             </SidebarHeader>
 
@@ -53,26 +54,26 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
                         <Link to="/" />
                     </MenuItem>
 
-                    {!user && (
+                    {!localStorage.user && (
                         <MenuItem icon={<FaSignInAlt />}>
                             Login
                             <Link to="/login" />
                         </MenuItem>
                     )}
 
-                    {!user && (
+                    {!localStorage.user && (
                         <MenuItem icon={<FaUserPlus />}>
                             Register <Link to="/register" />
                         </MenuItem>
                     )}
                     {/* <MenuItem icon={<FaTasks />} suffix={<span className="badge red">1</span>}> */}
 
-                    {user && (
+                    {localStorage.user && (
                         <MenuItem icon={<FaTasks />}>
                             Jobs <Link to="/jobs" />
                         </MenuItem>
                     )}
-                    {user && (
+                    {localStorage.user && (
                         <MenuItem icon={<FaPlus />}>
                             Add New Job <Link to="/new-job" />
                         </MenuItem>
@@ -94,6 +95,7 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
                             event.preventDefault();
                             authService.logout();
                             setUser(null);
+                            history.push('/');
                         }}
                         target="_blank"
                         className="sidebar-btn"
