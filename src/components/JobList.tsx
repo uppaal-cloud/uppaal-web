@@ -21,6 +21,16 @@ import {
     List,
     ListItem,
     ListIcon,
+    useDisclosure,
+    Modal,
+    Button,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Code,
 } from '@chakra-ui/react';
 import { ViewIcon } from '@chakra-ui/icons';
 import JobService from '../services/jobs.service';
@@ -105,6 +115,8 @@ function TCell({ columns, data }: any) {
 
 function JobList() {
     const [data, setData] = useState([]);
+    const [xml, setXml] = useState('');
+    let { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => {
         (async () => {
@@ -177,10 +189,19 @@ function JobList() {
             {
                 Header: 'XML',
                 accessor: 'xml',
-                Cell: ({ row }: Cell) => (
-                    <Tooltip label="View XML" fontSize="md">
-                        <IconButton aria-label="View XML" icon={<ViewIcon />} />
-                    </Tooltip>
+                Cell: ({ row }: Cell<any>) => (
+                    <>
+                        <Tooltip label="View XML" fontSize="md">
+                            <IconButton
+                                onClick={() => {
+                                    setXml(row.original.xml);
+                                    onOpen();
+                                }}
+                                aria-label="View XML"
+                                icon={<ViewIcon />}
+                            />
+                        </Tooltip>
+                    </>
                 ),
             },
             {
@@ -192,13 +213,28 @@ function JobList() {
         []
     );
 
-    // const data = React.useMemo(() => console.log(100000), []);
-    // const data = useMemo(async () => await JobService.fetchJobs(), []);
-    console.log(data);
-    return <TCell columns={columns} data={data} />;
-    // return <div></div>;
+    return (
+        <>
+            <TCell columns={columns} data={data} />
+            <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>XML Document</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Code>{xml}</Code>
+                    </ModalBody>
 
-    // return <CustomTable columns={columns} data={data} />;
+                    <ModalFooter>
+                        <Button mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                        <Button variant="ghost">Download</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+        </>
+    );
 }
 
 export interface Query {
