@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { MdCheckCircle, MdError } from 'react-icons/md';
 import { Cell, useTable } from 'react-table';
 import Moment from 'react-moment';
@@ -44,6 +44,14 @@ function TCell({ columns, data }: any) {
         columns,
         data,
     });
+    const handleTraceDownload = (query: any) => {
+        console.log(query);
+
+        if (!query.trace) return;
+
+        const blob = new Blob([query.trace], { type: 'text/plain;charset=utf-8' });
+        saveAs(blob, 'trace.xtr');
+    };
 
     return (
         <Table {...getTableProps()}>
@@ -84,25 +92,48 @@ function TCell({ columns, data }: any) {
                                             </h2>
                                             <AccordionPanel pb={4}>
                                                 <List>
-                                                    {data[i].queries.map((query: Query) => {
-                                                        return (
-                                                            <ListItem>
-                                                                <ListIcon
-                                                                    as={
-                                                                        query.result === 'satisfied'
-                                                                            ? MdCheckCircle
-                                                                            : MdError
+                                                    {data[i].queries.map(
+                                                        (query: Query, ind: number) => {
+                                                            return (
+                                                                <Tooltip
+                                                                    label={
+                                                                        query.trace
+                                                                            ? 'Download trace for ' +
+                                                                              query.formula
+                                                                            : ''
                                                                     }
-                                                                    color={
-                                                                        query.result === 'satisfied'
-                                                                            ? 'green.500'
-                                                                            : 'red.500'
-                                                                    }
-                                                                />
-                                                                {query.formula}
-                                                            </ListItem>
-                                                        );
-                                                    })}
+                                                                    aria-label="A tooltip"
+                                                                >
+                                                                    <ListItem
+                                                                        onClick={(
+                                                                            e: SyntheticEvent
+                                                                        ) => {
+                                                                            e.preventDefault();
+                                                                            handleTraceDownload(
+                                                                                data[i].queries[ind]
+                                                                            );
+                                                                        }}
+                                                                    >
+                                                                        <ListIcon
+                                                                            as={
+                                                                                query.result ===
+                                                                                'satisfied'
+                                                                                    ? MdCheckCircle
+                                                                                    : MdError
+                                                                            }
+                                                                            color={
+                                                                                query.result ===
+                                                                                'satisfied'
+                                                                                    ? 'green.500'
+                                                                                    : 'red.500'
+                                                                            }
+                                                                        />
+                                                                        {query.formula}
+                                                                    </ListItem>
+                                                                </Tooltip>
+                                                            );
+                                                        }
+                                                    )}
                                                 </List>
                                             </AccordionPanel>
                                         </AccordionItem>
@@ -147,8 +178,8 @@ function JobList() {
         })();
     }, [user]);
 
-    const handleDownload = (xml: string) => {
-        const blob = new Blob([xml], { type: 'text/plain;charset=utf-8' });
+    const handleXmlDownload = (xml: string) => {
+        const blob = new Blob([xml], { type: 'text/xml;charset=utf-8' });
         saveAs(blob, 'source.xml');
     };
 
@@ -240,7 +271,7 @@ function JobList() {
                         <Button mr={3} onClick={onClose}>
                             Close
                         </Button>
-                        <Button onClick={() => handleDownload(xml)} variant="ghost">
+                        <Button onClick={() => handleXmlDownload(xml)} variant="ghost">
                             Download
                         </Button>
                     </ModalFooter>
