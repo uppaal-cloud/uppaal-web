@@ -5,7 +5,6 @@ import {
     Container,
     Flex,
     Heading,
-    Link,
     Spacer,
     Text,
     Stack,
@@ -13,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import React from 'react';
+import { Link } from 'react-router-dom';
 const Home = () => {
     return (
         // <Wrap>
@@ -65,7 +65,7 @@ const Home = () => {
                     UPPAAL Cloud is a software-as-a-service for model validation based on the
                     popular UPPAAL tool.
                 </Heading>
-                <Link to={'/'}>
+                <Link to="/">
                     <Button
                         colorScheme="primary"
                         borderRadius="8px"
@@ -96,13 +96,17 @@ const Home = () => {
                 >
                     Use Uppaal Cloud NOW!
                 </Heading>
-                <Button colorScheme="teal" variant="outline" w="80%">
-                    Login
-                </Button>
+                <Link to="/login" style={{width: "80%"}}>
+                    <Button colorScheme="teal" variant="outline" w="100%">
+                        Login
+                    </Button>
+                </Link>
 
-                <Button variant="outline" w="80%">
-                    Register
-                </Button>
+                <Link to="/register" style={{width: "80%"}}>
+                    <Button variant="outline" w="100%">
+                        Register
+                    </Button>
+                </Link>
             </Stack>
         </Flex>
     );
