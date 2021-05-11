@@ -1,7 +1,15 @@
 import { BaseSyntheticEvent } from 'react';
-import { ProSidebar, Menu, SidebarHeader, SidebarFooter, SidebarContent, MenuItem } from 'react-pro-sidebar';
+import {
+    ProSidebar,
+    Menu,
+    SidebarHeader,
+    SidebarFooter,
+    SidebarContent,
+    MenuItem,
+} from 'react-pro-sidebar';
 import { FaSignOutAlt, FaHome, FaSignInAlt, FaTasks, FaPlus, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import authService from '../services/auth.service';
 
 const handleLogout = (event: BaseSyntheticEvent) => {
@@ -11,7 +19,13 @@ const handleLogout = (event: BaseSyntheticEvent) => {
 
 const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
     return (
-        <ProSidebar rtl={rtl} collapsed={collapsed} toggled={toggled} breakPoint="md" onToggle={handleToggleSidebar}>
+        <ProSidebar
+            rtl={rtl}
+            collapsed={collapsed}
+            toggled={toggled}
+            breakPoint="md"
+            onToggle={handleToggleSidebar}
+        >
             <SidebarHeader>
                 <div
                     style={{
@@ -47,6 +61,10 @@ const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
                     </MenuItem>
                     <MenuItem icon={<FaPlus />}>
                         Add New Job <Link to="/new-job" />
+                    </MenuItem>
+                    <MenuItem>
+                        Change theme
+                        <ColorModeSwitcher />
                     </MenuItem>
                 </Menu>
             </SidebarContent>

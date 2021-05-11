@@ -7,7 +7,7 @@ const fetchJobs = () => {
     if (!user) return;
 
     return axios.get('/job', { headers: authHeader() }).then((response) => {
-        return response.data;
+        return response.data.reverse();
     });
 };
 
@@ -22,11 +22,9 @@ const sumbitJob = (xml: string) => {
 
     if (!user) return;
 
-    return axios
-        .post('/job', requestParams, { headers: authHeader() })
-        .then((response) => {
-            return response.data;
-        });
+    return axios.post('/job', requestParams, { headers: authHeader() }).then((response) => {
+        return response.data;
+    });
 };
 
 export default { fetchJobs, sumbitJob };

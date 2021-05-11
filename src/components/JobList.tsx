@@ -184,7 +184,15 @@ function JobList() {
             {
                 Header: 'Start Time',
                 accessor: 'start',
-                Cell: ({ row }: Cell<any>) => <Moment date={row.original.start} unit="days" trim durationFromNow />,
+                Cell: ({ row }: Cell<any>) => (
+                    <Moment
+                        style={{ maxWidth: '120px', display: 'block' }}
+                        date={row.original.start}
+                        unit="days"
+                        trim
+                        durationFromNow
+                    />
+                ),
             },
             // {
             //     Header: 'End Time',

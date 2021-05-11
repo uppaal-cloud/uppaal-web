@@ -194,7 +194,7 @@ body {
     }
 }
 .pro-sidebar {
-    position: fixed
+    position: fixed;
 }
 `;
 export default GlobalStyle;
