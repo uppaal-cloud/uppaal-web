@@ -7,8 +7,8 @@ import styled from 'styled-components';
 
 const App: any = ({ props }: any) => {
     const [currentUser, setCurrentUser] = useState(undefined);
-    const [toggled, setToggled] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
+
 
     useEffect(() => {
         const user = AuthService.getCurrentUser();
@@ -18,16 +18,9 @@ const App: any = ({ props }: any) => {
         }
     }, []);
 
-    const handleToggleSidebar = (value: any) => {
-        setToggled(value);
-    };
-    const handleCollapsedChange = (checked: any) => {
-        setCollapsed(checked);
-    };
-
     return (
-        <AppContainer className={`app ${toggled ? 'toggled' : ''}`}>
-            <Aside collapsed={collapsed} toggled={toggled} handleToggleSidebar={handleToggleSidebar} />
+        <AppContainer className={`app ${collapsed ? 'toggled' : ''}`}>
+            <Aside collapsed={collapsed} setCollapsed={setCollapsed} />
             <Contents>{props.children}</Contents>
         </AppContainer>
     );

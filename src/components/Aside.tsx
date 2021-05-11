@@ -1,4 +1,3 @@
-import { BaseSyntheticEvent } from 'react';
 import {
     ProSidebar,
     Menu,
@@ -7,7 +6,7 @@ import {
     SidebarContent,
     MenuItem,
 } from 'react-pro-sidebar';
-import { FaSignOutAlt, FaHome, FaSignInAlt, FaTasks, FaPlus, FaUserPlus } from 'react-icons/fa';
+import { FaSignOutAlt, FaHome, FaSignInAlt, FaTasks, FaPlus, FaUserPlus, FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import authService from '../services/auth.service';
@@ -16,15 +15,13 @@ import useFindUser from '../hooks/useFindUser';
 // const handleLogout = (event: BaseSyntheticEvent) => {
 // };
 
-const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
+const Aside: any = ({ collapsed, setCollapsed }: any) => {
     const { user, setUser, isLoading } = useFindUser();
+
     return (
         <ProSidebar
-            rtl={rtl}
             collapsed={collapsed}
-            toggled={toggled}
             breakPoint="md"
-            onToggle={handleToggleSidebar}
         >
             <SidebarHeader>
                 <div
@@ -62,9 +59,8 @@ const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
                     <MenuItem icon={<FaPlus />}>
                         Add New Job <Link to="/new-job" />
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem icon={<ColorModeSwitcher />}>
                         Change theme
-                        <ColorModeSwitcher />
                     </MenuItem>
                 </Menu>
             </SidebarContent>
@@ -88,8 +84,13 @@ const Aside: any = ({ collapsed, rtl, toggled, handleToggleSidebar }: any) => {
                         rel="noopener noreferrer"
                     >
                         <FaSignOutAlt />
-                        <span>Logout</span>
+                        { !collapsed ? <span>Logout</span> : '' }
                     </a>
+                    { collapsed ?
+                        <FaAngleDoubleRight onClick={() => setCollapsed(false)} />
+                        :
+                        <FaAngleDoubleLeft onClick={() => setCollapsed(true)} />
+                    }
                 </div>
             </SidebarFooter>
         </ProSidebar>
