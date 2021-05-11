@@ -34,6 +34,8 @@ import {
     Code,
 } from '@chakra-ui/react';
 import { ViewIcon } from '@chakra-ui/icons';
+import prettyBytes from 'pretty-bytes';
+import prettyMs from 'pretty-ms';
 import JobService from '../services/jobs.service';
 import useFindUser from '../hooks/useFindUser';
 
@@ -165,25 +167,17 @@ function JobList() {
                 accessor: 'status',
             },
             {
-                Header: 'Memery Usage',
+                Header: 'Memory Usage',
                 accessor: 'ram',
                 Cell: ({ row }: Cell<any>) => {
-                    return <span>{row.original.ram / 1024} mB</span>;
+                    return prettyBytes(row.original.ram);
                 },
             },
             {
                 Header: 'CPU Usage',
                 accessor: 'cpu',
                 Cell: ({ row }: Cell<any>) => {
-                    return (
-                        <Moment
-                            date={new Date()}
-                            subtract={{ hours: 0, seconds: row.original.cpu }}
-                            unit="seconds"
-                            trim
-                            durationFromNow
-                        />
-                    );
+                    return prettyMs(row.original.cpu);
                 },
             },
             {
