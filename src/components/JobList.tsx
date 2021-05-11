@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdCheckCircle, MdError } from 'react-icons/md';
 import { Cell, useTable } from 'react-table';
 import Moment from 'react-moment';
+import { saveAs } from 'file-saver';
 
 import {
     Table,
@@ -141,6 +142,11 @@ function JobList() {
         })();
     }, []);
 
+    const handleDownload = (xml: string) => {
+        const blob = new Blob([xml], { type: 'text/plain;charset=utf-8' });
+        saveAs(blob, 'source.xml');
+    };
+
     const columns = React.useMemo(
         () => [
             {
@@ -210,7 +216,7 @@ function JobList() {
                 Cell: ({ row: { original } }: Cell<any>) => <span>{original.queries.length}</span>,
             },
         ],
-        []
+        [onOpen]
     );
 
     return (
@@ -229,7 +235,9 @@ function JobList() {
                         <Button mr={3} onClick={onClose}>
                             Close
                         </Button>
-                        <Button variant="ghost">Download</Button>
+                        <Button onClick={() => handleDownload(xml)} variant="ghost">
+                            Download
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

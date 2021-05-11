@@ -1,17 +1,8 @@
-import { Button } from '@chakra-ui/button';
-import { Box } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
-import Login from './components/Login';
-import Sidebar from './components/Sidebar';
-import Nav from './components/Nav';
 // import Sidebar from './components/Sidebar';
-import SidebarExample from './components/SimpleSidebar';
-import Routes from './routes';
-import login from './services/auth.service';
 import AuthService from './services/auth.service';
 import Aside from './components/Aside';
 // import './components/App.scss';
-import Main from './components/Main';
 import styled from 'styled-components';
 
 const App: any = ({ props }: any) => {
@@ -36,11 +27,7 @@ const App: any = ({ props }: any) => {
 
     return (
         <AppContainer className={`app ${toggled ? 'toggled' : ''}`}>
-            <Aside
-                collapsed={collapsed}
-                toggled={toggled}
-                handleToggleSidebar={handleToggleSidebar}
-            />
+            <Aside collapsed={collapsed} toggled={toggled} handleToggleSidebar={handleToggleSidebar} />
             <>{props.children}</>
         </AppContainer>
     );

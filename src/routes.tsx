@@ -6,9 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Jobs from './components/Jobs';
 import NotFound from './components/NotFound';
-import JobList from './components/JobList';
 import FileDropzone from './components/FileDropzone';
-// import Layout from './components/Layout';
 
 function Routes() {
     return (
