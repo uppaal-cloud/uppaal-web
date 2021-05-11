@@ -6,7 +6,16 @@ import {
     SidebarContent,
     MenuItem,
 } from 'react-pro-sidebar';
-import { FaSignOutAlt, FaHome, FaSignInAlt, FaTasks, FaPlus, FaUserPlus, FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
+import {
+    FaSignOutAlt,
+    FaHome,
+    FaSignInAlt,
+    FaTasks,
+    FaPlus,
+    FaUserPlus,
+    FaAngleDoubleRight,
+    FaAngleDoubleLeft,
+} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import authService from '../services/auth.service';
@@ -19,10 +28,7 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
     const { user, setUser, isLoading } = useFindUser();
 
     return (
-        <ProSidebar
-            collapsed={collapsed}
-            breakPoint="md"
-        >
+        <ProSidebar collapsed={collapsed} breakPoint="md">
             <SidebarHeader>
                 <div
                     style={{
@@ -53,15 +59,14 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
                     <MenuItem icon={<FaUserPlus />}>
                         Register <Link to="/register" />
                     </MenuItem>
-                    <MenuItem icon={<FaTasks />} suffix={<span className="badge red">1</span>}>
+                    {/* <MenuItem icon={<FaTasks />} suffix={<span className="badge red">1</span>}> */}
+                    <MenuItem icon={<FaTasks />}>
                         Jobs <Link to="/jobs" />
                     </MenuItem>
                     <MenuItem icon={<FaPlus />}>
                         Add New Job <Link to="/new-job" />
                     </MenuItem>
-                    <MenuItem icon={<ColorModeSwitcher />}>
-                        Change theme
-                    </MenuItem>
+                    <MenuItem icon={<ColorModeSwitcher />}>Change theme</MenuItem>
                 </Menu>
             </SidebarContent>
 
@@ -84,13 +89,13 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
                         rel="noopener noreferrer"
                     >
                         <FaSignOutAlt />
-                        { !collapsed ? <span>Logout</span> : '' }
+                        {!collapsed ? <span>Logout</span> : ''}
                     </a>
-                    { collapsed ?
+                    {collapsed ? (
                         <FaAngleDoubleRight onClick={() => setCollapsed(false)} />
-                        :
+                    ) : (
                         <FaAngleDoubleLeft onClick={() => setCollapsed(true)} />
-                    }
+                    )}
                 </div>
             </SidebarFooter>
         </ProSidebar>
