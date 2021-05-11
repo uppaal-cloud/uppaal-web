@@ -10,7 +10,7 @@ export default function useAuth() {
     const { setUser } = useFindUser();
     const [error, setError] = useState('');
 
-    const setUserContext = (user: any) => {
+    const setUserContext = async (user: any) => {
         if (!user) setError('local storage empty');
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
@@ -26,7 +26,12 @@ export default function useAuth() {
             })
             .then((response) => {
                 if (response.status === 200 && response.data.token) {
-                    setUserContext(response.data);
+                    const userRecord = response.data;
+                    userRecord.email = email;
+
+                    console.log(userRecord);
+
+                    setUserContext(userRecord);
                     window.location.reload();
                 }
 

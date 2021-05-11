@@ -42,7 +42,7 @@ const Aside: any = ({ collapsed, setCollapsed }: any) => {
                         whiteSpace: 'nowrap',
                     }}
                 >
-                    Uppaal Cloud
+                    {user?.email || 'Uppaal Cloud'}
                 </div>
             </SidebarHeader>
 

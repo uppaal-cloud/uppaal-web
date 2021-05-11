@@ -5,7 +5,7 @@ export default function useFindUser() {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        function findUser() {
+        async function findUser() {
             console.error('FIND USER');
             const usr = JSON.parse(localStorage.getItem('user')!);
 
