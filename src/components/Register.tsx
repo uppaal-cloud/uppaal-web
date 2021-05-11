@@ -1,14 +1,6 @@
 import { Flex, Box, Heading } from '@chakra-ui/layout';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import {
-    FormControl,
-    FormLabel,
-    Input,
-    Button,
-    InputRightElement,
-    IconButton,
-    InputGroup,
-} from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, Button, InputRightElement, IconButton, InputGroup } from '@chakra-ui/react';
 import { BaseSyntheticEvent, useState } from 'react';
 import AuthService from '../services/auth.service';
 
@@ -30,13 +22,7 @@ const Register = (props: any) => {
 
     return (
         <Flex width="full" align="center" justifyContent="center">
-            <Box
-                p={8}
-                maxWidth="600px"
-                borderWidth={1}
-                borderRadius={8}
-                boxShadow="lg"
-            >
+            <Box p={8} maxWidth="600px" borderWidth={1} borderRadius={8} boxShadow="lg">
                 <Box textAlign="center">
                     <Heading>Register</Heading>
                 </Box>
@@ -46,9 +32,7 @@ const Register = (props: any) => {
                             <FormLabel htmlFor="email">Email</FormLabel>
                             <Input
                                 type="email"
-                                onChange={({ target }) =>
-                                    setEmail(target.value)
-                                }
+                                onChange={({ target }) => setEmail(target.value)}
                                 placeholder="test@test.com"
                             />
                         </FormControl>
@@ -57,9 +41,7 @@ const Register = (props: any) => {
                             <InputGroup>
                                 <Input
                                     type={showPassword ? 'text' : 'password'}
-                                    onChange={({ target }) =>
-                                        setPassword(target.value)
-                                    }
+                                    onChange={({ target }) => setPassword(target.value)}
                                     placeholder="*******"
                                 />
                                 <InputRightElement width="3rem">
@@ -67,27 +49,13 @@ const Register = (props: any) => {
                                         aria-label="Show password"
                                         h="1.5rem"
                                         size="sm"
-                                        onClick={() =>
-                                            setShowPassword(!showPassword)
-                                        }
-                                        icon={
-                                            showPassword ? (
-                                                <ViewIcon />
-                                            ) : (
-                                                <ViewOffIcon />
-                                            )
-                                        }
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                                     />
                                 </InputRightElement>
                             </InputGroup>
                         </FormControl>
-                        <Button
-                            type="submit"
-                            colorScheme="teal"
-                            variant="outline"
-                            width="full"
-                            mt={4}
-                        >
+                        <Button type="submit" colorScheme="teal" variant="outline" width="full" mt={4}>
                             Register
                         </Button>
                     </form>
