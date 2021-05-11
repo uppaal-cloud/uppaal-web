@@ -49,7 +49,7 @@ const Home = () => {
                     size="3xl"
                     fontWeight="bold"
                     color="primary.800"
-                    textAlign={['center', 'center', 'left', 'left']}
+                    textAlign="center"
                 >
                     Welcome to UPPAAL Cloud!
                 </Heading>
@@ -60,7 +60,7 @@ const Home = () => {
                     opacity="0.8"
                     fontWeight="normal"
                     lineHeight={1.5}
-                    textAlign={['center', 'center', 'left', 'left']}
+                    textAlign="center"
                 >
                     UPPAAL Cloud is a software-as-a-service for model validation based on the
                     popular UPPAAL tool.
@@ -96,17 +96,28 @@ const Home = () => {
                 >
                     Use Uppaal Cloud NOW!
                 </Heading>
-                <Link to="/login" style={{width: "80%"}}>
-                    <Button colorScheme="teal" variant="outline" w="100%">
-                        Login
-                    </Button>
-                </Link>
 
-                <Link to="/register" style={{width: "80%"}}>
-                    <Button variant="outline" w="100%">
-                        Register
-                    </Button>
-                </Link>
+                {!localStorage.user ? (
+                    <>
+                        <Link to="/login" style={{ width: '80%' }}>
+                            <Button colorScheme="teal" variant="outline" w="100%">
+                                Login
+                            </Button>
+                        </Link>
+
+                        <Link to="/register" style={{ width: '80%' }}>
+                            <Button variant="outline" w="100%">
+                                Register
+                            </Button>
+                        </Link>
+                    </>
+                ) : (
+                    <Link to="/jobs" style={{ width: '80%' }}>
+                        <Button colorScheme="teal" w="100%">
+                            Jobs
+                        </Button>
+                    </Link>
+                )}
             </Stack>
         </Flex>
     );
