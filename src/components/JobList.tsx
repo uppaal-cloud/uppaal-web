@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { MdCheckCircle, MdError } from 'react-icons/md';
-import { useTable } from 'react-table';
+import { Cell, useTable } from 'react-table';
+import Moment from 'react-moment';
+
 import {
     Table,
     Thead,
@@ -142,31 +144,41 @@ function JobList() {
                 accessor: 'status',
             },
             {
-                Header: 'CPU Usage',
-                accessor: 'cpu',
-            },
-            {
                 Header: 'Memery Usage',
                 accessor: 'ram',
+                Cell: ({ row }: Cell<any>) => {
+                    return <span>{row.original.ram / 1024} mB</span>;
+                },
+            },
+            {
+                Header: 'CPU Usage',
+                accessor: 'cpu',
+                Cell: ({ row }: Cell<any>) => {
+                    return (
+                        <Moment
+                            date={new Date()}
+                            subtract={{ hours: 0, seconds: row.original.cpu }}
+                            unit="seconds"
+                            trim
+                            durationFromNow
+                        />
+                    );
+                },
             },
             {
                 Header: 'Start Time',
                 accessor: 'start',
-                Cell: ({ row }: any) => {
-                    console.log(row.original);
-                    return <span>{row.original.name}</span>;
-                },
+                Cell: ({ row }: Cell<any>) => <Moment date={row.original.start} unit="days" trim durationFromNow />,
             },
-            {
-                Header: 'End Time',
-                accessor: 'end',
-            },
+            // {
+            //     Header: 'End Time',
+            //     accessor: 'end',
+            // },
             {
                 Header: 'XML',
                 accessor: 'xml',
-                Cell: ({ row }) => (
+                Cell: ({ row }: Cell) => (
                     <Tooltip label="View XML" fontSize="md">
-                        {/* <ViewIcon /> */}
                         <IconButton aria-label="View XML" icon={<ViewIcon />} />
                     </Tooltip>
                 ),
@@ -174,7 +186,7 @@ function JobList() {
             {
                 Header: 'Results',
                 accessor: 'queries',
-                Cell: ({ row: { original } }) => <span>{original.queries.length}</span>,
+                Cell: ({ row: { original } }: Cell<any>) => <span>{original.queries.length}</span>,
             },
         ],
         []
