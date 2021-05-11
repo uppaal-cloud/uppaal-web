@@ -1,6 +1,14 @@
 import { Flex, Box, Heading } from '@chakra-ui/layout';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { FormControl, FormLabel, Input, Button, InputRightElement, IconButton, InputGroup } from '@chakra-ui/react';
+import {
+    FormControl,
+    FormLabel,
+    Input,
+    Button,
+    InputRightElement,
+    IconButton,
+    InputGroup,
+} from '@chakra-ui/react';
 import { BaseSyntheticEvent, useState } from 'react';
 import AuthService from '../services/auth.service';
 
@@ -9,13 +17,13 @@ const Register = (props: any) => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSignIn = async (event: BaseSyntheticEvent) => {
+    const handleSignUp = async (event: BaseSyntheticEvent) => {
         event.preventDefault();
 
         await AuthService.register(email, password).then((res: any) => {
             console.log(res);
 
-            props.history.push('/');
+            props.history.push('/login');
             // window.location.reload();
         });
     };
@@ -27,7 +35,7 @@ const Register = (props: any) => {
                     <Heading>Register</Heading>
                 </Box>
                 <Box my={4} textAlign="left">
-                    <form method="POST" onSubmit={handleSignIn}>
+                    <form method="POST" onSubmit={handleSignUp}>
                         <FormControl isRequired>
                             <FormLabel htmlFor="email">Email</FormLabel>
                             <Input
@@ -55,7 +63,13 @@ const Register = (props: any) => {
                                 </InputRightElement>
                             </InputGroup>
                         </FormControl>
-                        <Button type="submit" colorScheme="teal" variant="outline" width="full" mt={4}>
+                        <Button
+                            type="submit"
+                            colorScheme="teal"
+                            variant="outline"
+                            width="full"
+                            mt={4}
+                        >
                             Register
                         </Button>
                     </form>
