@@ -1,9 +1,8 @@
-import { ChakraProvider, theme, CSSReset } from '@chakra-ui/react';
 import App from './App';
+import { ChakraProvider, theme, CSSReset } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import '../node_modules/react-pro-sidebar/dist/scss/styles.scss';
 import GlobalStyle from './GlobalStyles';
-// import 'react-pro-sidebar/dist/scss/styles.scss';
+import '../node_modules/react-pro-sidebar/dist/scss/styles.scss';
 import 'typeface-roboto';
 
 function Root(props: any) {

@@ -193,5 +193,8 @@ body {
         background: #ffd331;
     }
 }
+.pro-sidebar {
+    position: fixed
+}
 `;
 export default GlobalStyle;

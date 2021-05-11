@@ -28,7 +28,7 @@ const App: any = ({ props }: any) => {
     return (
         <AppContainer className={`app ${toggled ? 'toggled' : ''}`}>
             <Aside collapsed={collapsed} toggled={toggled} handleToggleSidebar={handleToggleSidebar} />
-            <>{props.children}</>
+            <Contents>{props.children}</Contents>
         </AppContainer>
     );
 };
@@ -36,27 +36,12 @@ const App: any = ({ props }: any) => {
 const AppContainer = styled.div`
     height: 100%;
     display: flex;
-    position: relative;
+    /* position: relative; */
 `;
-//  <Main
-//     collapsed={collapsed}
-//     toggled={toggled}
-//     handleToggleSidebar={handleToggleSidebar}
-//     handleCollapsedChange={handleCollapsedChange}
-// />
-// <SidebarExample />
-// <div>
-//     h1
-//     <div style={{ display: 'flex' }}>
-//         <Sidebar />
-//         <div>
-//             {/* <Nav /> */}
-//             {/* <Routes /> */}
-//         </div>
-//     </div>
-// </div>
 
-// <Login />
-// return <Button onClick={login('dsadasd', 'asdasdad')} />;
+const Contents = styled.div`
+    width: 100%;
+    margin-left: 270px;
+`;
 
 export default App;
