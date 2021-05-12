@@ -10,6 +10,7 @@ import FileDropzone from './components/FileDropzone';
 import { UserContext } from './hooks/UserContext';
 import useFindUser from './hooks/useFindUser';
 import PrivateRoute from './components/PrivateRoute';
+import NewJob from './components/NewJob';
 
 function Routes() {
     const { user, setUser, isLoading } = useFindUser();
@@ -27,7 +28,7 @@ function Routes() {
                                 <Route path="/login" component={Login} />
                                 <Route path="/register" component={Register} />
                                 <PrivateRoute path="/jobs" component={Jobs} />
-                                <PrivateRoute path="/new-job" component={FileDropzone} />
+                                <PrivateRoute path="/new-job" component={NewJob} />
 
                                 <Route component={NotFound} />
                             </Switch>

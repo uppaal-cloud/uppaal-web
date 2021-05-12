@@ -163,15 +163,15 @@ function JobList() {
             }
             const arr: any = res.map((entry: any) => {
                 return {
-                    name: entry.name,
-                    description: entry.description,
-                    status: entry.status,
-                    cpu: entry.usage.cpu,
-                    ram: entry.usage.ram,
-                    start: entry.start_time,
-                    end: entry.end_time,
-                    xml: entry.xml,
-                    queries: entry.queries,
+                    name: entry.name || 'Job Name',
+                    description: entry.description || 'Job Description',
+                    status: entry?.status || 'running',
+                    cpu: entry?.usage?.cpu || 0,
+                    ram: entry?.usage?.ram || 0,
+                    start: entry?.start_time || '',
+                    end: entry?.end_time || '',
+                    xml: entry?.xml || '',
+                    queries: entry?.queries || [],
                 };
             });
             setData(arr);

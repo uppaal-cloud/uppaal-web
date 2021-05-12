@@ -6,7 +6,6 @@ export default function useFindUser() {
 
     useEffect(() => {
         async function findUser() {
-            console.error('FIND USER');
             const usr = JSON.parse(localStorage.getItem('user')!);
 
             if (usr) setUser(usr);

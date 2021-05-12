@@ -11,12 +11,12 @@ const fetchJobs = (user: any) => {
     });
 };
 
-const sumbitJob = (user: any, xml: string) => {
-    // const user = JSON.parse(localStorage.getItem('user')!);
+const sumbitJob = (name: string, description: string, xml: string) => {
+    const user = JSON.parse(localStorage.getItem('user')!);
 
     const requestParams = {
-        name: 'test job',
-        description: 'desc',
+        name: name,
+        description: description,
         xml: xml,
     };
 

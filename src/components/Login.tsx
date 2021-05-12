@@ -35,7 +35,7 @@ const Login = (props: any) => {
     };
 
     return (
-        <Flex width="full" align="center" justifyContent="center">
+        <Flex width="full" my="10%" align="center" justifyContent="center">
             <Box p={8} maxWidth="600px" borderWidth={1} borderRadius={8} boxShadow="lg">
                 <Box textAlign="center">
                     <Heading>Login</Heading>

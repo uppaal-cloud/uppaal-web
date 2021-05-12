@@ -1,10 +1,9 @@
 import { Container } from '@chakra-ui/layout';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
-import { useDropzone, FileWithPath } from 'react-dropzone';
+import { useCallback, useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 import styled from 'styled-components';
 import useFindUser from '../hooks/useFindUser';
-import JobService from '../services/jobs.service';
 
 const getColor = (props: any) => {
     if (props.isDragAccept) {
@@ -34,7 +33,7 @@ const DropContainer = styled.div`
     outline: none;
     transition: border 0.24s ease-in-out;
 `;
-function FileDropzone(props: any) {
+function FileDropzone({ setXml }: any) {
     const [file, setFile] = useState<any>({});
     const { user, isLoading } = useFindUser();
 
@@ -59,15 +58,14 @@ function FileDropzone(props: any) {
                 // const parser = new DOMParser();
                 // const parsedXml = parser.parseFromString(xmlStr, 'application/xml');
                 // console.log(parsedXml);
-                const res = await JobService.sumbitJob(user, xmlStr);
-                console.log(res);
+                // const res = await JobService.sumbitJob(user, xmlStr);
+                // console.log(res);
+                setXml(xmlStr);
             };
-
+            setFile(xmlFile);
             reader.readAsText(xmlFile);
-
-            setFile(acceptedFile[0]);
         },
-        [user]
+        [setXml]
     );
 
     useEffect(() => {
@@ -92,32 +90,3 @@ function FileDropzone(props: any) {
 }
 
 export default FileDropzone;
-
-// import React, { ReactNode } from 'react';
-// import { FileWithPath, useDropzone } from 'react-dropzone';
-
-// function NewJob(props: any) {
-//     const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
-
-//     // This is another component but concise example
-//     const fileList = (files: FileWithPath[]): ReactNode =>
-//         files.map((file) => (
-//             <li key={file.path}>
-//                 {file.path} - {file.size} bytes
-//             </li>
-//         ));
-
-//     return (
-//         <section className="container">
-//             <div {...getRootProps({ className: 'dropzone' })}>
-//                 <input {...getInputProps()} />
-//                 <p>Drag 'n' drop some files here, or click to select files</p>
-//             </div>
-//             <aside>
-//                 <h4>Files</h4>
-//                 <ul>{fileList(acceptedFiles)}</ul>
-//             </aside>
-//         </section>
-//     );
-// }
-// export default NewJob;
