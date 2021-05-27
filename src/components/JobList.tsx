@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
-import { MdCheckCircle, MdError } from 'react-icons/md';
+import { MdCheckCircle, MdError, MdSave } from 'react-icons/md';
 import { Cell, useTable } from 'react-table';
 import Moment from 'react-moment';
 import { saveAs } from 'file-saver';
@@ -32,6 +32,7 @@ import {
     ModalHeader,
     ModalOverlay,
     Code,
+    Text,
 } from '@chakra-ui/react';
 import { ViewIcon } from '@chakra-ui/icons';
 import prettyBytes from 'pretty-bytes';
@@ -95,42 +96,56 @@ function TCell({ columns, data }: any) {
                                                     {data[i].queries.map(
                                                         (query: Query, ind: number) => {
                                                             return (
-                                                                <Tooltip
-                                                                    label={
-                                                                        query.trace
-                                                                            ? 'Download trace for ' +
-                                                                              query.formula
-                                                                            : ''
-                                                                    }
-                                                                    aria-label="A tooltip"
+                                                                <ListItem
+                                                                    onClick={(
+                                                                        e: SyntheticEvent
+                                                                    ) => {
+                                                                        e.preventDefault();
+                                                                        handleTraceDownload(
+                                                                            data[i].queries[ind]
+                                                                        );
+                                                                    }}
                                                                 >
-                                                                    <ListItem
-                                                                        onClick={(
-                                                                            e: SyntheticEvent
-                                                                        ) => {
-                                                                            e.preventDefault();
-                                                                            handleTraceDownload(
-                                                                                data[i].queries[ind]
-                                                                            );
-                                                                        }}
+                                                                    <ListIcon
+                                                                        as={
+                                                                            query.result ===
+                                                                            'satisfied'
+                                                                                ? MdCheckCircle
+                                                                                : MdError
+                                                                        }
+                                                                        color={
+                                                                            query.result ===
+                                                                            'satisfied'
+                                                                                ? 'green.500'
+                                                                                : 'red.500'
+                                                                        }
+                                                                    />
+                                                                    <Tooltip
+                                                                        label={
+                                                                            query.trace
+                                                                                ? 'Download trace for ' +
+                                                                                  query.formula
+                                                                                : ''
+                                                                        }
+                                                                        aria-label="A tooltip"
                                                                     >
-                                                                        <ListIcon
-                                                                            as={
-                                                                                query.result ===
-                                                                                'satisfied'
-                                                                                    ? MdCheckCircle
-                                                                                    : MdError
+                                                                        <Text
+                                                                            as="span"
+                                                                            cursor={
+                                                                                query.trace
+                                                                                    ? 'pointer'
+                                                                                    : 'default'
                                                                             }
-                                                                            color={
-                                                                                query.result ===
-                                                                                'satisfied'
-                                                                                    ? 'green.500'
-                                                                                    : 'red.500'
-                                                                            }
-                                                                        />
-                                                                        {query.formula}
-                                                                    </ListItem>
-                                                                </Tooltip>
+                                                                        >
+                                                                            {query.formula}
+                                                                        </Text>
+                                                                    </Tooltip>
+                                                                    {query.trace ? (
+                                                                        <ListIcon as={MdSave} />
+                                                                    ) : (
+                                                                        ''
+                                                                    )}
+                                                                </ListItem>
                                                             );
                                                         }
                                                     )}
