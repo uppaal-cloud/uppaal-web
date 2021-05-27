@@ -239,10 +239,18 @@ function JobList() {
                     />
                 ),
             },
-            // {
-            //     Header: 'End Time',
-            //     accessor: 'end',
-            // },
+            {
+                Header: 'End Time',
+                accessor: 'end',
+                Cell: ({ row }: Cell<any>) => (
+                    <Moment
+                        style={{ maxWidth: '120px', display: 'block' }}
+                        date={row.original.end}
+                        format="MMMM Do YYYY, h:mm:ss a"
+                        trim
+                    />
+                ),
+            },
             {
                 Header: 'XML',
                 accessor: 'xml',
