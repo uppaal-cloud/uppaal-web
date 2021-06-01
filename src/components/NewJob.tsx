@@ -140,11 +140,8 @@ function NewJob() {
                                                     <Text my={2}>State Space Reduction</Text>
                                                     <Stack direction="row">
                                                         <Radio value="none">None</Radio>
-                                                        <Radio value="conservative">
-                                                            Conservative
-                                                        </Radio>
-                                                        <Radio value="aggressive">Aggressive</Radio>
-                                                        <Radio value="extreme">Extreme</Radio>
+                                                        <Radio value="some">Some</Radio>
+                                                        <Radio value="most">Most</Radio>
                                                     </Stack>
                                                 </RadioGroup>
 

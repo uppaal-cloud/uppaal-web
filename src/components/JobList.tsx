@@ -96,16 +96,7 @@ function TCell({ columns, data }: any) {
                                                     {data[i].queries.map(
                                                         (query: Query, ind: number) => {
                                                             return (
-                                                                <ListItem
-                                                                    onClick={(
-                                                                        e: SyntheticEvent
-                                                                    ) => {
-                                                                        e.preventDefault();
-                                                                        handleTraceDownload(
-                                                                            data[i].queries[ind]
-                                                                        );
-                                                                    }}
-                                                                >
+                                                                <ListItem>
                                                                     <ListIcon
                                                                         as={
                                                                             query.result ===
@@ -130,6 +121,16 @@ function TCell({ columns, data }: any) {
                                                                         aria-label="A tooltip"
                                                                     >
                                                                         <Text
+                                                                            onClick={(
+                                                                                e: SyntheticEvent
+                                                                            ) => {
+                                                                                e.preventDefault();
+                                                                                handleTraceDownload(
+                                                                                    data[i].queries[
+                                                                                        ind
+                                                                                    ]
+                                                                                );
+                                                                            }}
                                                                             as="span"
                                                                             cursor={
                                                                                 query.trace
