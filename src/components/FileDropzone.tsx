@@ -28,7 +28,7 @@ const DropContainer = styled.div`
     border-radius: 2px;
     border-color: ${(props) => getColor(props)};
     border-style: dashed;
-    background-color: #fafafa;
+    background-color: #303030;
     color: #bdbdbd;
     outline: none;
     transition: border 0.24s ease-in-out;
